@@ -5,7 +5,7 @@ from player import Player
 from classes import *
 from enemy import Enemy
 from combat import combat
-
+from hub import hub
 
 print("")
 print("")
@@ -37,6 +37,8 @@ player_class = choice(player_choice)
 
 def main():
     
+    game = True
+    
     player = Player(player_class, player_name)
     #item = Item()
     enemies = [Enemy.goblin(),
@@ -46,28 +48,35 @@ def main():
     
     print(f"\nWelcome {player.name}\nYour choice was {player_class.__class__.__name__}\nThis gives you:\n{player.hp} hp\n{player.min_damage} to {player.max_damage} damage\nGood luck!")
 
+    new_enemies = False
+    while game:
+        action = hub(player)
+        if action == "forest":
+        
+            while player.is_alive():
+                
+                if new_enemies == False and player.level == 5:
+                    new_enemies = True
+                    enemies.append(Enemy.wolf())
+                    enemies.append(Enemy.ogre())  
+                                
+                enemy = random.choice(enemies)
 
-    
-    while player.is_alive():
+                
+                print("============================")
+                print(f"\nA wild {enemy.name} appears!\n")
+                print("============================")
+                
+                combat(player, enemy)
+                
+                if player.is_alive():
+                    action = input("\n1 Keep fighting\n2 Run\n")
+                    if action == "2":
+                        print("You went home")
+                        break
+        elif action == "quit":
+            break            
         
-        if player.level_up == 5:
-            enemies.append(Enemy.wolf())
-            enemies.append(Enemy.ogre())
-                        
-        enemy = random.choice(enemies)
-
-        
-        print("============================")
-        print(f"\nA wild {enemy.name} appears!\n")
-        print("============================")
-        
-        combat(player, enemy)
-        
-        if player.is_alive():
-            action = input("\n1 Keep fighting\n2 Run\n")
-            if action == "2":
-                print("You went home")
-                break
                 
     
 if __name__ == "__main__":

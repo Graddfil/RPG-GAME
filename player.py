@@ -16,6 +16,9 @@ class Player:
         self.max_hp = player_class.max_hp
         self.min_damage = player_class.min_damage
         self.max_damage = player_class.max_damage
+        self.gold = 0
+        self.equipped_wepon
+        self.equipped_armor
         self.inventory = []
     
      #exp counter
