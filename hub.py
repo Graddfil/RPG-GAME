@@ -12,14 +12,15 @@ def hub(player):
     print("WELCOME TO TOWN")
     print("----------------------------------------\n")
 
-    player.hp = player.max_hp
-    print(f"You feel refreshed and heal {player.hp}/{player.max_hp}")
+    if player.hp > player.max_hp:
+        player.hp = player.max_hp
+        print(f"You feel refreshed and heal {player.hp}/{player.max_hp}")
 
     action = None
-    player_choice = input(f"1. Enter combat\n2. Shop\n3. Player stats\n4. Quit game\n\n")
+    player_choice = input(f"1. Enter combat\n2. Shop\n3. Inventory\n4. Quit game\n\n")
     
     if player_choice == "1":
-        action = "forest"
+        action = "combat"
         return action
     
     elif player_choice == "2":
@@ -27,7 +28,7 @@ def hub(player):
         return action
     
     elif player_choice == "3":
-        action = "stats"
+        action = "inventory"
         return action
     
     elif player_choice == "4":

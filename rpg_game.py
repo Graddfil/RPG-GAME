@@ -1,11 +1,13 @@
 # RPG GAEM
 
 import random
+from items import *
 from player import Player
 from classes import *
 from enemy import Enemy
 from combat import combat
 from hub import hub
+from weapons import *
 
 print("")
 print("")
@@ -40,10 +42,13 @@ def main():
     game = True
     
     player = Player(player_class, player_name)
+    player.inventory.append(lumber_axe)
+
     #item = Item()
     enemies = [Enemy.goblin(),
                Enemy.orc(),
                Enemy.lizardman(),]
+    
     
     
     print(f"\nWelcome {player.name}\nYour choice was {player_class.__class__.__name__}\nThis gives you:\n{player.hp} hp\n{player.min_damage} to {player.max_damage} damage\nGood luck!")
@@ -51,7 +56,7 @@ def main():
     new_enemies = False
     while game:
         action = hub(player)
-        if action == "forest":
+        if action == "combat":
         
             while player.is_alive():
                 
@@ -74,6 +79,25 @@ def main():
                     if action == "2":
                         print("You went home")
                         break
+        
+        elif action == "inventory":
+            if not player.inventory:
+                player.show_inventory()
+            else:
+                player.show_inventory()
+                equip_choice = input("Do you want to equip item?\n1. Yes\n2. No")
+                if equip_choice == "1":
+                    item_choice = int(input("What item number?"))
+                    final = player.inventory[item_choice - 1]
+                    if item_choice not in player.inventory:
+                        print("Invalid choice")
+                    player.equip_gear(final)
+            
+            
+        
+        elif action == "shop":
+            pass
+
         elif action == "quit":
             break            
         

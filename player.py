@@ -1,5 +1,5 @@
 import random
-from items import Potion
+from items import *
 
 
 # PLAYER
@@ -17,8 +17,8 @@ class Player:
         self.min_damage = player_class.min_damage
         self.max_damage = player_class.max_damage
         self.gold = 0
-        self.equipped_wepon
-        self.equipped_armor
+        self.equipped_weapon = None
+        self.equipped_armor = None
         self.inventory = []
     
      #exp counter
@@ -56,11 +56,65 @@ class Player:
                 print(f"{self.name} has no potions left!")
         return potion_used
         
-        
+    #gear
+    def equip_gear(self, item):
+        if item in self.inventory:
+            if isinstance(item, Weapon):
+                if self.equipped_weapon is not None:
+                    self.inventory.append(self.equipped_weapon)
+                    self.equipped_weapon = item
+                    self.inventory.remove(item)
+                    print(f"You are now using {self.equipped_weapon.name}")
+                else:
+                    self.equipped_weapon = item
+                    self.inventory.remove(item)
+                    print(f"You are now using {self.equipped_weapon.name}")
+                    
+            elif isinstance(item, Armor):
+                if self.equipped_weapon is not None:
+                    self.inventory.append(self.equipped_armor)
+                    self.equipped_armor = item
+                    self.inventory.remove(item)
+                    print(f"You are now using {self.equipped_armor.name}")
+                else:
+                    self.equipped_armor = item
+                    self.inventory.remove(item)
+                    print(f"You are now using {self.equipped_armor.name}")
     
+    def remove_gear(self):
+        if isinstance(Weapon):
+            if self.equipped_weapon is not None:
+                self.inventory.append(self.equipped_weapon)
+                self.equipped_weapon = None
+                print(f"You are now using fists")
+            else:
+                self.equipped_weapon = None
+                print(f"You dont have weapon")
+                
+        elif isinstance(Armor):
+            if self.equipped_armor is not None:
+                self.inventory.append(self.equipped_armor)
+                self.equipped_armor = None
+                print(f"You are now without armor")
+            else:
+                self.equipped_armor = None
+                print(f"You dont have armor")
+                    
+    def show_inventory(self):
+        if not self.inventory:
+            print("Inventory is empty")
+        
+        else:
+            for i, item in enumerate(self.inventory, start=1):
+                print(f"You have:\n{i}, {item.name}")
+                 
     #combat
     def attack(self, target):
-        damage = random.randint(self.min_damage, self.max_damage)
+        if self.equipped_weapon is None:
+            damage = random.randint(self.min_damage, self.max_damage)
+        else:
+            weapon_bonus = self.equipped_weapon.damage_bonus
+            damage = weapon_bonus + random.randint(self.min_damage, self.max_damage)
         print(f"\n{self.name} attacks {target.name}!")
         target.take_damage(damage)
     
