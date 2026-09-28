@@ -20,7 +20,7 @@ class Mage:
 
 class Beggar:
     #define stats
-    def __init__(self, hp=1, min_damage=1,max_damage=1):
+    def __init__(self, hp=10, min_damage=1,max_damage=1):
         
         self.hp = hp
         self.max_hp = hp

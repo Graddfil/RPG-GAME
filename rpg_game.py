@@ -8,6 +8,8 @@ from enemy import Enemy
 from combat import combat
 from hub import hub
 from weapons import *
+from armors import *
+from potions import *
 
 print("")
 print("")
@@ -42,8 +44,13 @@ def main():
     game = True
     
     player = Player(player_class, player_name)
-    #player.inventory.append(lumber_axe)
-    #player.inventory.append(steel_sword)
+    player.inventory.append(dawn_bringer)
+    player.inventory.append(chutulus_chest)
+    player.inventory.append(steel_sword)
+    player.inventory.append(greater_potion)
+    player.inventory.append(healing_potion)
+    player.inventory.append(leather_vest)
+    player.inventory.append(rusty_dagger)
 
     #item = Item()
     enemies = [Enemy.goblin(),
@@ -86,9 +93,9 @@ def main():
                 player.show_inventory()
             else:
                 player.show_inventory()
-                equip_choice = input("Do you want to equip item?\n1. Yes\n2. No")
+                equip_choice = input("Do you want to equip item?\n1. Yes\n2. No\n")
                 if equip_choice == "1":
-                    item_choice = int(input("What item number?"))
+                    item_choice = int(input("What item number?\n"))
                     final = player.inventory[item_choice - 1]
                     if item_choice not in player.inventory:
                         print("Invalid choice")

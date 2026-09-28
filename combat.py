@@ -7,7 +7,6 @@ def combat(player, enemy):
     combat_result = None
     
     while player.is_alive() and enemy.is_alive():
-        print("DEBUG: combat alkaa, player HP =", player.hp)
         print(f"\n{player.name} HP: {player.hp} / {player.max_hp}")
         print(f"{enemy.name} HP: {enemy.hp} / {enemy.max_hp}\n")
         
@@ -39,15 +38,15 @@ def combat(player, enemy):
             player.hp -= 1
     
     if player.is_alive() and combat_result == "won":
-        print("DEBUG:", player.hp, player.is_alive(), combat_result)
         print(f"{player.name} defeated {enemy.name}")
         print(f"\n\nYou won!\nYou have {player.hp} hp\nEXP: {player.exp} / {player.exp_to_next_lvl}\n")
         player.gain_exp(enemy.exp_drop)
-        dropped_item = enemy.get_drops()
+        dropped_items = enemy.get_drops()
         enemy.hp = enemy.max_hp
-        if dropped_item:
-            print(f"\n{enemy.name} dropped {dropped_item.name}!")
-            player.inventory.append(dropped_item)
+        if dropped_items:
+            for item in dropped_items:
+                print(f"\n{enemy.name} dropped {item.name}!")
+                player.inventory.append(item)
             
     elif player.is_alive() and combat_result == "run":
         print(f"{player.name} run successfully")

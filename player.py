@@ -105,10 +105,31 @@ class Player:
             print("Inventory is empty")
         
         else:
+            weapons = []
+            armors = []
+            potions = []
             for i, item in enumerate(self.inventory, start=1):
-                print("You have:")
-                print(f"{i}, {item.name}")
+                if isinstance(item, Weapon):
+                    weapons.append((i,item))
+                    
+                elif isinstance(item, Armor):    
+                    armors.append((i,item))
                 
+                elif isinstance(item, Potion):
+                    potions.append((i,item))
+            
+            print("Weapons:")
+            for i, item in weapons:
+                print(f"{i}, {item.name}")
+
+            print("Armors:")
+            for i, item in armors:
+                print(f"{i}, {item.name}")
+        
+            print("Potions:")
+            for i, item in potions:
+                print(f"{i}, {item.name}")      
+        
     #combat
     def attack(self, target):
         if self.equipped_weapon is None:
@@ -120,8 +141,15 @@ class Player:
         target.take_damage(damage)
     
     def take_damage(self, damage):
-        self.hp -= damage
-        print(f"{self.name} takes {damage} damage\n")
+        if self.equipped_armor is None:
+            self.hp -= damage
+            print(f"{self.name} takes {damage} damage\n")
+        else:
+            damage_reduction = self.equipped_armor.damage_reudction
+            taken_hit = max(1, damage - damage_reduction)
+            self.hp -= taken_hit
+            print(f"{self.name} takes {taken_hit} damage\n")
+            
 
     def is_alive(self):
         return self.hp > 0

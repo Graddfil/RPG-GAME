@@ -19,11 +19,12 @@ class Enemy:
         self.drop_table = drop_table if drop_table else []
 
     def get_drops(self):
+        drop_list = []
         for item, drop_rate in self.drop_table:
             if random.random() <= drop_rate:
-                drop_list = []
-                drop_list.append(item.name)
-                return drop_list
+                drop_list.append(item)
+        return drop_list
+                #return item
         return None
 
     def attack(self, target):
