@@ -42,7 +42,8 @@ def main():
     game = True
     
     player = Player(player_class, player_name)
-    player.inventory.append(lumber_axe)
+    #player.inventory.append(lumber_axe)
+    #player.inventory.append(steel_sword)
 
     #item = Item()
     enemies = [Enemy.goblin(),

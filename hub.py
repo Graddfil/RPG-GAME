@@ -12,7 +12,7 @@ def hub(player):
     print("WELCOME TO TOWN")
     print("----------------------------------------\n")
 
-    if player.hp > player.max_hp:
+    if player.hp < player.max_hp:
         player.hp = player.max_hp
         print(f"You feel refreshed and heal {player.hp}/{player.max_hp}")
 

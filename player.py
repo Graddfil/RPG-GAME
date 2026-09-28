@@ -71,7 +71,7 @@ class Player:
                     print(f"You are now using {self.equipped_weapon.name}")
                     
             elif isinstance(item, Armor):
-                if self.equipped_weapon is not None:
+                if self.equipped_armor is not None:
                     self.inventory.append(self.equipped_armor)
                     self.equipped_armor = item
                     self.inventory.remove(item)
@@ -106,8 +106,9 @@ class Player:
         
         else:
             for i, item in enumerate(self.inventory, start=1):
-                print(f"You have:\n{i}, {item.name}")
-                 
+                print("You have:")
+                print(f"{i}, {item.name}")
+                
     #combat
     def attack(self, target):
         if self.equipped_weapon is None:

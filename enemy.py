@@ -1,5 +1,9 @@
 import random
 from items import *
+from weapons import*
+from potions import *
+from armors import *
+
 
 
 
@@ -17,7 +21,9 @@ class Enemy:
     def get_drops(self):
         for item, drop_rate in self.drop_table:
             if random.random() <= drop_rate:
-                return item
+                drop_list = []
+                drop_list.append(item.name)
+                return drop_list
         return None
 
     def attack(self, target):
@@ -34,20 +40,17 @@ class Enemy:
     
     @classmethod
     def goblin(cls):
-        #drop_table = [(Weapon("Rusty Dagger", 3), 0.2), (Armor("Worn Leather Armor", 5), 0.1),(Potion("Healing Potion", 20),0.25)]
-        drop_table = [(Potion("Healing Potion", 20),1)]
+        drop_table = [(rusty_dagger, 1), (leather_vest, 1),(healing_potion,1)]
         return cls(name="Goblin", hp=50, min_damage = 7, max_damage = 17, exp_drop = 10, drop_table = drop_table)           
         
     @classmethod
     def orc(cls):
-        #drop_table = [(Weapon("Orcish Axe", 6), 0.3), (Armor("Orcish Chainmail", 8), 0.2),(Potion("Healing Potion", 20),0.25)]
-        drop_table = [(Potion("Healing Potion", 20),1)]
+        drop_table = [(iron_sword, 1), (leather_vest, 1),(healing_potion, 1)]
         return cls(name="Orc", hp=65, min_damage=11, max_damage=21, exp_drop=15, drop_table=drop_table)
     
     @classmethod
     def lizardman(cls):
-        #drop_table = [(Weapon("Lizardman Spear", 10), 0.25), (Armor("Scaled Armor", 12), 0.15),(Potion("Healing Potion", 20),0.25)]
-        drop_table = [(Potion("Healing Potion", 20),1)]
+        drop_table = [(lumber_axe, 1), (leather_vest, 1),(big_potion, 1)]
         return cls(name="Lizardman", hp=75, min_damage=14, max_damage=24, exp_drop=20, drop_table=drop_table)
     
     @classmethod

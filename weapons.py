@@ -6,3 +6,7 @@ steel_sword = Weapon("Steel Sword", 10, 20)
 
 #axses
 lumber_axe = Weapon("Lmber Axe", 7, 12)
+
+
+#daggers
+rusty_dagger = Weapon("Rsty Dagger", 3, 8)
